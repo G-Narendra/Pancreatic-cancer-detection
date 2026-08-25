@@ -104,6 +104,15 @@ The **EfficientNet-based variants (EfficientDense and EfficientV3)** significant
 
 ---
 
+## Engineering Decisions & Challenges Solved
+
+| Challenge | Decision | Why |
+|---|---|---|
+| Limited labeled medical images for training | Transfer learning with pretrained CNNs (VGG16, ResNet50, InceptionV3) fine-tuned on medical data | Pretrained features generalize well; fine-tuning adapts them to medical imaging domain without needing millions of labeled images |
+| Class imbalance (fewer cancer-positive cases) | Stratified splitting and class-weighted loss function | Ensures the model doesn't just predict the majority class — critical for medical diagnosis where missing positives has severe consequences |
+| Comparing multiple architectures fairly | Identical preprocessing, split ratios, and evaluation metrics across all models | Fair comparison requires controlled variables — only the model architecture differs between experiments |
+| Model interpretability for medical use | Accuracy, precision, recall, F1-score, and confusion matrix reported per model | A single accuracy number hides the cost of false negatives in cancer detection — full metrics expose the trade-offs |
+
 ## 👨‍💻 Author
 
 **Narendra (G‑Narendra)** AI | ML | Python | Full Stack | GenAI Enthusiast
